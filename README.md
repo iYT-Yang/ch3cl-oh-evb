@@ -59,7 +59,7 @@ The `data/` directory collects the processed numerical data used in the figures:
 
 - `reactive_pmfs/`: 1D PMFs for the reaction in bulk and slabs, including different numbers of waters and slab positions.
 - `solvation_pmfs/`: PMFs for solvation and surface affinity of CH<sub>3</sub>Cl and OH in droplets and slabs.
-- `rdf`/: O–O* RDF data.
+- `rdf/`: O–O* RDF data.
 - `qm_pes/`: QM reference PES along the IRC.
 
 Running the analysis scripts in `analysis/` reproduces processed curves and error estimates from the raw MD outputs.
