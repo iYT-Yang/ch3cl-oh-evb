@@ -23,8 +23,6 @@ If you use this repository, please cite the paper above.
 .
 ├── analysis/          # Python scripts used to analyze trajectories and PMFs
 ├── data/              # Processed data used for figures (PMFs, RDFs, QM PES, etc.)
-├── evb/               # Standalone EVB implementation (Python module)
-├── forcefield/        # EVB and classical FF parameters (CHARMM/OpenMM style)
 ├── md_simulations/    # Representative MD input files, scripts, and selected trajectories
 ├── qm/                # Quantum chemistry reference data (IRC and stationary points)
 └── README.md          # This file
@@ -33,18 +31,8 @@ If you use this repository, please cite the paper above.
 ---
 
 ## Quick start
-### 1. EVB model and force-field parameters
-The EVB implementation and parameters used in the paper are provided in:
 
-- `evb/` – Python module implementing the EVB Hamiltonian and utilities.
-- `forcefield/` – Parameter files:
-  - `para.json`: EVB parameter set used in the simulations
-  - `off.xml`, `toppar.xml`, `toppar.str`: force-field definitions
-  - `computed_energy_with_this_evb_model.txt`: sanity-check energies for the EVB model
-
-These files are also duplicated in relevant MD folders under `md_simulations/` (e.g. in various `inits/` subdirectories) so each system can be run independently.
-
-### 2. MD simulations
+### 1. MD simulations
 `md_simulations/` contains representative input files and scripts for the different types of simulations discussed in the paper:
 
 - `rdf/` – Example simulation and scripts to compute O–O* radial distribution functions.
@@ -53,8 +41,11 @@ These files are also duplicated in relevant MD folders under `md_simulations/` (
 - `solvation_droplet/` – Solvation free-energy simulations for CH<sub>3</sub>Cl and OH radical in droplets of various sizes, including umbrella sampling setups.
 
 Each major subdirectory contains its own README describing how the example was run and how to regenerate the key observables (PMFs, etc.).
+The EVB implementation is provided in each relevant MD folders under `md_simulations/` (e.g. in various `evb/` subdirectories) as a Python module. 
+And the force field parameters for the water, reactant, product models and off-term parameters for EVB are provided in the corresponding `inits/toppar.str`, `inits/toppar.xml`, and `inits/off.xml'. 
 
-### 3. Data used for figures
+
+### 2. Data used for figures
 The `data/` directory collects the processed numerical data used in the figures:
 
 - `reactive_pmfs/`: 1D PMFs for the reaction in bulk and slabs, including different numbers of waters and slab positions.
@@ -64,7 +55,7 @@ The `data/` directory collects the processed numerical data used in the figures:
 
 Running the analysis scripts in `analysis/` reproduces processed curves and error estimates from the raw MD outputs.
 
-### 4. Quantum chemistry reference data
+### 3. Quantum chemistry reference data
 The `qm/` folder contains all quantum chemistry input and output files used to construct the reference potential energy surface and stationary points:
 
 - `cluster_irc/`: IRC calculation and single-point TightPNO DLPNO-CCSD(T)/aug-cc-pVQZ energies along the reaction path.
@@ -88,7 +79,7 @@ These scripts expect the directory structure and file naming conventions used in
 
 - Python 3.8+
 - Standard scientific Python stack (NumPy, SciPy, Matplotlib); MD engine-specific Python APIs as required (e.g. OpenMM, etc.).
-- A MD engine capable of using the provided EVB and FF parameters (see force-field formats in `forcefield/` and `md_simulations/*/inits/`).
+- An MD engine capable of using the provided EVB and FF parameters (see force-field formats in `forcefield/` and `md_simulations/*/inits/`).
 
 ### 2. Re-run representative simulations
 
